@@ -8,10 +8,6 @@ html {
   font-family: Tahoma, sans-serif;
 }
 
-body {
-  margin: 0;
-}
-
 .main-ui {
   max-width: 50em;
   margin: 0 auto 6em;
@@ -21,7 +17,8 @@ body {
 .max {
   display: flex;
   justify-content: center;
-  gap: 4.5em;
+  align-items: flex-start;
+  gap: 1em;
 }
 .max-one,
 .max-two {
@@ -45,11 +42,19 @@ body {
 .max span {
   font-size: 1.5em;
 }
+.update-button {
+  color: white;
+  font-size: 0.9em;
+  background: blue;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.25em 0.5em;
+}
 
 .problem {
   text-align: center;
   font-size: 5em;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
 .our-form {
@@ -149,7 +154,7 @@ form button {
 }
 .end-message {
   color: white;
-  font-size: 3em;
+  font-size: 2.5em;
 }
 .reset-button {
   color: white;
@@ -157,6 +162,7 @@ form button {
   background: blue;
   border: none;
   padding: 0.75em 1.5em;
+  display: none;
 }
 
 body.overlay-is-open .overlay {

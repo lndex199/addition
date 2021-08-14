@@ -3,11 +3,12 @@ const ourForm = document.querySelector('.our-form')
 const ourField = document.querySelector('.our-field')
 const pointsNeeded = document.querySelector('.points-needed')
 const mistakesAllowed = document.querySelector('.mistakes-allowed')
-const progressBar = document.querySelector('.progress-inner')
 const endMessage = document.querySelector('.end-message')
 const resetButton = document.querySelector('.reset-button')
+const progressBar = document.querySelector('.progress-inner')
 const maxOne = document.getElementById('maxOne')
 const maxTwo = document.getElementById('maxTwo')
+const updateButton = document.querySelector('.update-button')
 
 let state = {
   score: 0,
@@ -17,7 +18,7 @@ let state = {
 updateProblem()
 
 function updateProblem() {
-  state.currentProblem = generateProblem(maxOne.value, maxTwo.value)
+  state.currentProblem = generateProblem(Number.parseInt(maxOne.value), Number.parseInt(maxTwo.value))
   problemElement.innerHTML = `${state.currentProblem.numberOne} ${state.currentProblem.operator} ${state.currentProblem.numberTwo}`
   ourField.value = ''
   ourField.focus()
@@ -62,16 +63,42 @@ function handleSubmit(e) {
 }
 
 function checkLogic() {
+  if (Number.parseInt(maxOne.value) < 3 || Number.parseInt(maxTwo.value) < 3) {
+    resetQuestion()
+  }
+
   if (state.score === 10) {
-    endMessage.textContent = 'congrats! You Won.'
+    endMessage.textContent = 'Congrats! You Won.'
     document.body.classList.add('overlay-is-open')
+    resetButton.style.display = 'block'
     setTimeout(() => resetButton.focus(), 331)
   }
 
   if (state.wrongAnswers === 3) {
     endMessage.textContent = 'Sorry, You Lost.'
     document.body.classList.add('overlay-is-open')
+    resetButton.style.display = 'block'
     setTimeout(() => resetButton.focus(), 331)
+  }
+}
+
+function resetQuestion() {
+  endMessage.textContent = 'Set numbers above 2.'
+  document.body.classList.add('overlay-is-open')
+  maxOne.value = 100
+  maxTwo.value = 100
+  updateProblem()
+  resetButton.style.display = 'none'
+  setTimeout(() => document.body.classList.remove('overlay-is-open'), 2000)
+}
+
+updateButton.addEventListener('click', updateQuestion)
+
+function updateQuestion() {
+  if (Number.parseInt(maxOne.value) < 3 || Number.parseInt(maxTwo.value) < 3) {
+    resetQuestion()
+  } else {
+    updateProblem()
   }
 }
 
@@ -79,6 +106,8 @@ resetButton.addEventListener('click', resetGame)
 
 function resetGame() {
   document.body.classList.remove('overlay-is-open')
+  maxOne.value = 100
+  maxTwo.value = 100
   updateProblem()
   state.score = 0
   state.wrongAnswers = 0
