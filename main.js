@@ -68,6 +68,7 @@ function checkLogic() {
   if (state.score === 10) {
     endMessage.textContent = 'Congrats! You Won.'
     document.body.classList.add('overlay-is-open')
+    returnButton.style.display = 'none'
     resetButton.style.display = 'block'
     setTimeout(() => resetButton.focus(), 331)
   }
@@ -75,6 +76,7 @@ function checkLogic() {
   if (state.wrongAnswers === 3) {
     endMessage.textContent = 'Sorry, You Lost.'
     document.body.classList.add('overlay-is-open')
+    returnButton.style.display = 'none'
     resetButton.style.display = 'block'
     setTimeout(() => resetButton.focus(), 331)
   }
