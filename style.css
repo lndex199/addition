@@ -49,12 +49,13 @@ html {
   border: none;
   border-radius: 0.5em;
   padding: 0.25em 0.5em;
+  outline: none;
 }
 
 .problem {
   text-align: center;
-  font-size: 5em;
-  letter-spacing: 0.12em;
+  font-size: 5.5em;
+  letter-spacing: 0.11em;
 }
 
 .our-form {
@@ -86,6 +87,7 @@ form button {
   border: none;
   border-radius: 0 0.5em 0.5em 0;
   font-size: 1.2em;
+  outline: none;
 }
 
 .status {
@@ -155,14 +157,25 @@ form button {
 .end-message {
   color: white;
   font-size: 2.5em;
+  text-align: center;
 }
 .reset-button {
   color: white;
   font-size: 2em;
   background: blue;
   border: none;
+  border-radius: 0.5em;
   padding: 0.75em 1.5em;
-  display: none;
+  outline: none;
+}
+.return-button {
+  color: white;
+  font-size: 1.5em;
+  background: blue;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.75em 1.5em;
+  outline: none;
 }
 
 body.overlay-is-open .overlay {

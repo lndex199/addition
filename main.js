@@ -9,6 +9,7 @@ const progressBar = document.querySelector('.progress-inner')
 const maxOne = document.getElementById('maxOne')
 const maxTwo = document.getElementById('maxTwo')
 const updateButton = document.querySelector('.update-button')
+const returnButton = document.querySelector('.return-button')
 
 let state = {
   score: 0,
@@ -59,14 +60,11 @@ function handleSubmit(e) {
     setTimeout(() => problemElement.classList.remove('animate-wrong'), 451)
     ourField.value = ''
   }
+  updateQuestion()
   checkLogic()
 }
 
 function checkLogic() {
-  if (Number.parseInt(maxOne.value) < 3 || Number.parseInt(maxTwo.value) < 3) {
-    resetQuestion()
-  }
-
   if (state.score === 10) {
     endMessage.textContent = 'Congrats! You Won.'
     document.body.classList.add('overlay-is-open')
@@ -82,16 +80,6 @@ function checkLogic() {
   }
 }
 
-function resetQuestion() {
-  endMessage.textContent = 'Set numbers above 2.'
-  document.body.classList.add('overlay-is-open')
-  maxOne.value = 100
-  maxTwo.value = 100
-  updateProblem()
-  resetButton.style.display = 'none'
-  setTimeout(() => document.body.classList.remove('overlay-is-open'), 2000)
-}
-
 updateButton.addEventListener('click', updateQuestion)
 
 function updateQuestion() {
@@ -102,12 +90,28 @@ function updateQuestion() {
   }
 }
 
+function resetQuestion() {
+  endMessage.innerHTML = 'Set maximum<br>numbers above 2'
+  document.body.classList.add('overlay-is-open')
+  maxOne.value = 100
+  maxTwo.value = 100
+  updateProblem()
+  returnButton.style.display = 'block'
+  resetButton.style.display = 'none'
+  setTimeout(() => returnButton.focus(), 331)
+}
+
+returnButton.addEventListener('click', returnToNewQuestion)
+
+function returnToNewQuestion() {
+  document.body.classList.remove('overlay-is-open')
+  updateProblem()
+}
+
 resetButton.addEventListener('click', resetGame)
 
 function resetGame() {
   document.body.classList.remove('overlay-is-open')
-  maxOne.value = 100
-  maxTwo.value = 100
   updateProblem()
   state.score = 0
   state.wrongAnswers = 0
